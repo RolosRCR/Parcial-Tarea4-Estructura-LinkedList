@@ -1,15 +1,18 @@
 package com.company.list;
- class Node {
-    private int dato;
-    private Node previous;
-    private Node next;
 
-    public int getDato() {
-        return dato;
+ class Node {
+    private int data;
+    private Node previous;//se inicializan a null sin que yo lo tenga que decir
+    private Node next;
+    Node(int data){
+        this.data=data;
+    }
+    public int getData() {
+        return data;
     }
 
-    public void setDato(int dato) {
-        this.dato = dato;
+    public void setData(int dato) {
+        this.data = data;
     }
 
     public Node getPrevious() {
@@ -27,4 +30,5 @@ package com.company.list;
     public void setNext(Node next) {
         this.next = next;
     }
+
 }
