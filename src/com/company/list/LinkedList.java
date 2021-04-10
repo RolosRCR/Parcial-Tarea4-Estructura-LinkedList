@@ -1,82 +1,59 @@
 package com.company.list;
-
-
-
-
-
 /**
  * Lista doblemente ligada
  */
-public class LinkedList {
-    private class Node {
-        private int data;
-        private Node previous;//se inicializan a null sin que yo lo tenga que decir
-        private Node next;
-        Node(int data){
+public class LinkedList<T> {
+    private class Node<T> {
+        private T data;
+        private Node<T> previous;//se inicializan a null sin que yo lo tenga que decir
+        private Node<T> next;
+        Node(T data){
             this.data=data;
         }
-        public int getData() {
+        public T getData() {
             return data;
         }
 
-        public void setData(int dato) {
+        public void setData(T dato) {
             this.data = data;
         }
 
-        public Node getPrevious() {
+        public Node<T> getPrevious() {
             return previous;
         }
 
-        public void setPrevious(Node previous) {
+        public void setPrevious(Node<T> previous) {
             this.previous = previous;
         }
 
-        public Node getNext() {
+        public Node<T> getNext() {
             return next;
         }
 
-        public void setNext(Node next) {
+        public void setNext(Node<T> next) {
             this.next = next;
         }
 
     }
     public static final int BEFORE = 0;
     public static  final int AFTER = 1;
-    private Node head;
-    private Node tail;
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
-    public static class Iterator {
-        private Node currentNode;
-
-
-        public Iterator(Node currentNode) {
-
-            this.currentNode = currentNode;
-        }
-
-        public Iterator(Iterator iterator) {
-            currentNode = iterator.currentNode;
-        }
-
-        public boolean hasNext() {
-            return currentNode != null;
-        }
-
-        public int next() {
-            int data = currentNode.getData();
+    public  class Iterator {
+        private Node<T> currentNode;
+        public Iterator() {this.currentNode = head; }
+        public Iterator(Iterator iterator) {currentNode = iterator.currentNode; }
+        public boolean hasNext() { return currentNode != null;}
+        public T next() {
+            T data = currentNode.getData();
             currentNode = currentNode.getNext();
-            return data;
-        }
-
-        Node getCurrentNode() {
-            return currentNode;
-        }
-    }
-    public static class ReverseIterator{
-        private Node currentNode;
-
-        public ReverseIterator(Node currentNode){
-            this.currentNode=currentNode;
+            return data; }
+        Node<T> getCurrentNode() { return currentNode; }}
+        public  class ReverseIterator{
+        private Node<T> currentNode;
+        public ReverseIterator(){
+            this.currentNode=tail;
         }
         public ReverseIterator(ReverseIterator reversIterator){
             currentNode=reversIterator.currentNode;
@@ -84,22 +61,20 @@ public class LinkedList {
         public boolean hasPrevious(){
             return currentNode!=null;
         }
-
-        public int previous(){
-            int data=currentNode.getData();
+        public T previous(){
+            T data = currentNode.getData();
             currentNode = currentNode.getPrevious();
             return data;
         }
-
-        Node getCurrentNode() {
+        Node<T> getCurrentNode() {
             return currentNode;
         }
     }
     /**
      * Inserts data at the end of the list
      */
-    public void add(int data) {
-        Node node = new Node(data);
+    public void add(T data) {
+        Node<T> node = new Node<>(data);
         node.setPrevious(tail);
         if (tail != null) {
             tail.setNext(node);
@@ -115,8 +90,8 @@ public class LinkedList {
         return size;
     }
 
-    public int get(int index) {
-        Node currentNode = head;
+    public T get(int index) {
+        Node<T> currentNode = head;
         int currentIndex = 0;
         while (currentIndex < index) {
             currentNode = currentNode.getNext();
@@ -127,7 +102,7 @@ public class LinkedList {
 
     public void delete(int index) {
         int currentIndex = 0;
-        Node currentNode = head;
+        Node<T> currentNode = head;
         if (index < 0 || index >= size) {
             return;
         }
@@ -157,16 +132,16 @@ public class LinkedList {
 
     //Un itrerador es un patrón de diseño
     public Iterator getIterator() {
-        return new Iterator(head);
+        return new Iterator();
     }
 
     public ReverseIterator getReverseIterator() {
-        return new ReverseIterator(tail);
+        return new ReverseIterator();
     }
 
-    public void insert(int data,Position position, Iterator it) {
-        Node newNode = new Node(data);
-        Node currentNode = it.getCurrentNode();
+    public void insert(T data,Position position, Iterator it) {
+        Node<T> newNode = new Node<>(data);
+        Node<T> currentNode = it.getCurrentNode();
 
         if (position == Position.AFTER) {
             newNode.setNext(currentNode.getNext());
