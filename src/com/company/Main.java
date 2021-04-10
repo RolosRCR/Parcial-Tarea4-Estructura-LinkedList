@@ -1,9 +1,7 @@
 package com.company;
 
-import com.company.list.Iterator;
 import com.company.list.LinkedList;
 import com.company.list.Position;
-import com.company.list.ReverseIterator;
 
 
 class contenedor<T>{
@@ -34,12 +32,12 @@ public class Main {
 
 
         System.out.println("El tamaño de la lista es: " + lista1.getSize());
-        Iterator it = lista1.getIterator();
-        ReverseIterator it2 = lista1.getReverseIterator();
+        LinkedList.Iterator it = lista1.getIterator();
+        LinkedList.ReverseIterator it2 = lista1.getReverseIterator();
         System.out.println("\nImprimir Arreglo con Iterator\n");
 
         while (it.hasNext()) {
-            Iterator backupIt = new Iterator(it);
+            LinkedList.Iterator backupIt = new LinkedList.Iterator(it);
             int element = it.next(); //regresa el dato y avanza el iterador
             System.out.println("Dato:" + element);
             if (element == 3) {

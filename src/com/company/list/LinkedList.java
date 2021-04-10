@@ -1,15 +1,100 @@
 package com.company.list;
 
+
+
+
+
 /**
  * Lista doblemente ligada
  */
 public class LinkedList {
+    private class Node {
+        private int data;
+        private Node previous;//se inicializan a null sin que yo lo tenga que decir
+        private Node next;
+        Node(int data){
+            this.data=data;
+        }
+        public int getData() {
+            return data;
+        }
+
+        public void setData(int dato) {
+            this.data = data;
+        }
+
+        public Node getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(Node previous) {
+            this.previous = previous;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+    }
     public static final int BEFORE = 0;
     public static  final int AFTER = 1;
     private Node head;
     private Node tail;
     private int size;
+    public static class Iterator {
+        private Node currentNode;
 
+
+        public Iterator(Node currentNode) {
+
+            this.currentNode = currentNode;
+        }
+
+        public Iterator(Iterator iterator) {
+            currentNode = iterator.currentNode;
+        }
+
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        public int next() {
+            int data = currentNode.getData();
+            currentNode = currentNode.getNext();
+            return data;
+        }
+
+        Node getCurrentNode() {
+            return currentNode;
+        }
+    }
+    public static class ReverseIterator{
+        private Node currentNode;
+
+        public ReverseIterator(Node currentNode){
+            this.currentNode=currentNode;
+        }
+        public ReverseIterator(ReverseIterator reversIterator){
+            currentNode=reversIterator.currentNode;
+        }
+        public boolean hasPrevious(){
+            return currentNode!=null;
+        }
+
+        public int previous(){
+            int data=currentNode.getData();
+            currentNode = currentNode.getPrevious();
+            return data;
+        }
+
+        Node getCurrentNode() {
+            return currentNode;
+        }
+    }
     /**
      * Inserts data at the end of the list
      */
@@ -43,7 +128,7 @@ public class LinkedList {
     public void delete(int index) {
         int currentIndex = 0;
         Node currentNode = head;
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             return;
         }
         size--;
