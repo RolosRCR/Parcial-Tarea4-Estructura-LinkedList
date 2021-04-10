@@ -5,6 +5,7 @@ public class Iterator{
 
 
     public Iterator(Node currentNode){
+
         this.currentNode=currentNode;
     }
     public Iterator(Iterator iterator){

@@ -43,7 +43,7 @@ public class LinkedList {
     public void delete(int index) {
         int currentIndex = 0;
         Node currentNode = head;
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             return;
         }
         size--;

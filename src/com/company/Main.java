@@ -5,9 +5,23 @@ import com.company.list.LinkedList;
 import com.company.list.Position;
 import com.company.list.ReverseIterator;
 
+
+class contenedor<T>{
+    T dato;
+
+    public T getDato() {
+        return dato;
+    }
+
+    public void setDato(T dato) {
+        this.dato = dato;
+    }}
+
+
 public class Main {
 
     public static void main(String[] args) {
+        contenedor <Integer> contenedor = new contenedor<>();
         LinkedList lista1 = new LinkedList();
         lista1.add(1);
         lista1.add(4);
